@@ -1,0 +1,20 @@
+<%- include('../includes/header.ejs', { titulo : 'Adicionar Turma' }) %>
+
+<main>
+    <h2>Adicionar Nova Turma</h2>
+
+    <form action="/turmas/novo" method="POST" class="form">
+        <div class="form-group">
+            <label for="nome_turma">Nome do Turma:</label>
+            <input type="text" id="nome_turma" name="nome_turma" required>
+        </div>
+        <button type="submit" class="btn btn-primary"> Adicionar </button>
+        <a href="/turmas" class="btn btn-secondary">Cancelar</a>
+        <% if(typeof mensagem != 'undefined') { %>
+            <p><%= mensagem %> </p>
+        <% } %>
+        
+    </form>
+</main>
+
+<%- include('../includes/footer.ejs') %>

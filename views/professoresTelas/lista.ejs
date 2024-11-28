@@ -1,0 +1,40 @@
+<%- include('../includes/header.ejs', { titulo : 'Lista Professores' }) %>
+
+    <main>
+        <h2>Lista de Professores</h2>
+        <a href="/professores/novo" class="btn btn-primary"> Adicionar Professor</a>
+
+        <table class="dados-table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Formação</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let professor of professores) { %>
+                    <tr>
+                        <td>
+                            <%= professor.nome_professor %>
+                        </td>
+                        <td>
+                            <%= professor.telefone %>
+                        </td>
+                        <td>
+                            <%= professor.formacao %>
+                        </td>
+                        <td>
+                            <a href="/professores/<%= professor.id_professor %>/editar" class="btn btn-edit"> Editar </a> |
+                            <form action="/professores/<%= professor.id_professor %>/deletar" method="POST">
+                                <button type="submit" class="btn btn-delete">Excluir</button>
+                            </form>
+                        </td>
+                    </tr>
+                    <% } %>
+            </tbody>
+        </table>
+    </main>
+
+    <%- include('../includes/footer.ejs') %>

@@ -1,0 +1,30 @@
+<%- include('../includes/header.ejs', { titulo: 'Lista de Turmas' }) %>
+  <main>
+    <h2>Lista de Turmas</h2>
+    <a href="/turmas/novo" class="btn btn-primary">Adicionar Turma</a>
+
+    <table class="dados-table">
+      <thead>
+        <tr>
+          <th>Nome da Turma</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let turma of turmas) { %>
+          <tr>
+            <td>
+              <%= turma.nome_turma %>
+            </td>
+            <td>
+              <a href="/turmas/<%= turma.id_turma %>/editar" class="btn btn-edit"> Editar </a> |
+              <form action="/turmas/<%= turma.id_turma %>/deletar" method="POST">
+                <button type="submit" class="btn btn-delete">Excluir</button>
+              </form>
+            </td>
+          </tr>
+          <% } %>
+      </tbody>
+    </table>
+  </main>
+  <%- include('../includes/footer.ejs') %>

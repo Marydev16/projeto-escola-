@@ -1,0 +1,59 @@
+<%- include('../includes/header.ejs', { titulo: 'Lista de Alunos' }) %>
+  <main>
+    <h2>Lista de Alunos</h2>
+    <a href="/alunos/novo" class="btn btn-primary">Adicionar Aluno</a>
+
+    <% if (typeof mensagem != 'undefined') { %>
+          <p class="erro"> <%= mensagem %> </p>
+    <% } %>
+
+    <form action="/alunos/" method="GET" class="form form-consulta">
+      <input type="text" name="busca" 
+          value="<%= busca %>"
+          placeholder="Buscar nome ou turma" />
+      <button type="submit" class="btn btn-primary">Buscar</button>
+      <select name="ordenar" onchange="this.form.submit()" >
+        <option value="nome" 
+          <%= ordenar == 'nome' ? 'selected' : '' %> >Ordenar por nome</option>
+        <option value="nome_turma"
+          <%= ordenar == 'nome_turma' ? 'selected' : '' %>>Ordenar por nome turma</option>
+      </select>
+    </form>
+
+    <table class="dados-table">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Idade</th>
+          <th>Sexo</th>
+          <th>Turma</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for (let aluno of vetorDados) { %>
+          <tr>
+            <td>
+              <%= aluno.nome %>
+            </td>
+            <td>
+              <%= aluno.idade %>
+            </td>
+            <td>
+              <%= aluno.sexo %>
+            </td>
+            <td>
+              <%= aluno.nome_turma %>
+            </td>
+            <td>
+              <a href="/alunos/<%= aluno.id_aluno %>/editar" class="btn btn-edit"> Editar </a> |
+              <form action="/alunos/<%= aluno.id_aluno %>/deletar" method="POST">
+                <button type="submit" class="btn btn-delete">Excluir</button>
+              </form>
+            </td>
+          </tr>
+          <% } %>
+      </tbody>
+    </table>
+  </main>
+  <%- include('../includes/footer.ejs') %>
